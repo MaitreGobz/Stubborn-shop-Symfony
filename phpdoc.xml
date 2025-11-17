@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpdocumentor configVersion="3">
+    <title>Stubborn site eCommerce - Documentation technique</title>
+
+    <paths>
+        <!-- Output folder for the generated documentation -->
+        <output>docs/phpdoc</output>
+        <!-- Cache to accelerate the next generations -->
+        <cache>var/cache/phpdoc</cache>
+    </paths>
+
+    <versions>
+        <version number="1.0">
+            <api>
+                <!-- Where to look for the code -->
+                <source dsn=".">
+                    <path>src</path>
+                    <path>tests</path>
+                </source>
+
+                <!-- What we ignore -->
+                <ignore hidden="true">
+                    <path>vendor</path>
+                    <path>var</path>
+                    <path>public</path>
+                </ignore>
+            </api>
+        </version>
+    </versions>
+</phpdocumentor>
