@@ -1,0 +1,113 @@
+.login-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 20rem;
+    height: auto;
+    margin: 5rem auto;
+    padding: 1.25rem 1.5rem 1.5rem;
+    background-color: #ffffff;
+    border: 0.125rem solid #8b7d7d;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.login-card h1 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding-bottom: 1.5rem;
+    border-bottom: solid rgba(118, 193, 250, 0.514);
+}
+
+.alert {
+    padding: 0.5rem 0.625rem;
+    margin-bottom: 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 1.2rem;
+}
+
+.alert-danger {
+    background-color: #ffe5e5;
+    border: 1px solid #ffb3b3;
+    color: #a33a3a;
+}
+
+.login-card form {
+    margin-bottom: 0.625rem;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 0.125rem solid #8b7d7d;
+    border-radius: 2px;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+}
+
+.login-card button {
+    display: block;
+    align-content: center;
+    width: 60%;
+    margin: 0.5rem auto;
+    padding: 0.5rem 0;
+    text-align: center;
+    background-color: #3ba9ff;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.5rem;
+    border-radius: 0.4rem;
+    border: 0.125rem solid #3ba9ff;
+    cursor: pointer;
+}
+
+.login-card button:hover {
+    background-color: #2f95e4;
+}
+
+.login-card p {
+    font-size: 1.2rem;
+}
+
+.forgot-password {
+    color: #3ba9ff;
+    border-bottom: solid rgba(118, 193, 250, 0.514);
+    padding-bottom: 0.8rem;
+}
+
+.register-btn {
+    display: block;
+    align-content: center;
+    width: 60%;
+    margin: 0.5rem auto;
+    padding: 0.5rem 0.5rem;
+    text-align: center;
+    background-color: #3ba9ff;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.5rem;
+    border-radius: 0.4rem;
+    border: 0.125rem solid #3ba9ff;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.register-btn:hover {
+    background-color: #2f95e4;
+}
