@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -22,10 +23,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * Identifiant unique auto-généré de l'utilisateur.
+     * 
+     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -34,6 +38,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Adresse email servant d'identifiant de connexion.
+     * 
+     * @var string|null
      */
     #[ORM\Column(length: 180)]
     private ?string $email = null;
@@ -48,18 +54,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Mot de passe hashé.
+     * 
+     * @var string|null
      */
     #[ORM\Column]
     private ?string $password = null;
 
     /**
-     * Nom de l'utilisateur
+     * Nom de l'utilisateur.
+     * 
+     * @var string|null
      */
     #[ORM\Column(length: 225)]
     private ?string $name = null;
 
     /**
      * Adresse de livraison.
+     * 
+     * @var string|null
      */
     #[ORM\Column(type: Types::TEXT)]
     private ?string $deliveryAddress = null;
@@ -69,6 +81,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * false = compte non activé
      * true  = compte activé
+     * 
+     * @var bool|false
      */
     #[ORM\Column(type: 'boolean')]
     private bool $isVerified = false;
@@ -148,14 +162,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getDeliveryAdress(): ?string
+    public function getDeliveryAddress(): ?string
     {
-        return $this->deliveryAdress;
+        return $this->deliveryAddress;
     }
 
-    public function setDeliveryAdress(string $deliveryAdress): static
+    public function setDeliveryAddress(string $deliveryAddress): static
     {
-        $this->deliveryAdress = $deliveryAdress;
+        $this->deliveryAddress = $deliveryAddress;
 
         return $this;
     }

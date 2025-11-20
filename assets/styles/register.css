@@ -1,4 +1,4 @@
-.login-card {
+.register-card {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -12,7 +12,7 @@
     font-size: 14px;
 }
 
-.login-card h1 {
+.register-card h1 {
     font-size: 1.4rem;
     font-weight: 500;
     padding-bottom: 1.5rem;
@@ -32,24 +32,24 @@
     color: #a33a3a;
 }
 
-.login-form {
+.register-form-group {
     display: flex;
     margin-bottom: 0.625rem;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.form-group {
+.form-row {
     margin-bottom: 1.2rem;
 }
 
-.form-group label {
+.form-row label {
     display: block;
     margin-bottom: 0.5rem;
     font-size: 1.2rem;
 }
 
-.form-group input {
+.form-row input {
     width: 100%;
     padding: 0.5rem;
     border: 0.125rem solid #8b7d7d;
@@ -58,11 +58,11 @@
     font-size: 1.2rem;
 }
 
-.login-card button {
+.register-btn {
     display: block;
     align-content: center;
-    width: 60%;
-    margin: 0.5rem auto;
+    width: fit-content;
+    margin: 1rem auto;
     padding: 0.5rem 0;
     text-align: center;
     background-color: #3ba9ff;
@@ -74,21 +74,15 @@
     cursor: pointer;
 }
 
-.login-card button:hover {
+.register-btn:hover {
     background-color: #2f95e4;
 }
 
-.login-card p {
+.register-card p {
     font-size: 1.2rem;
 }
 
-.forgot-password {
-    color: #3ba9ff;
-    border-bottom: solid rgba(118, 193, 250, 0.514);
-    padding-bottom: 0.8rem;
-}
-
-.register-link {
+.login-link {
     display: block;
     align-content: center;
     width: 60%;
@@ -105,6 +99,10 @@
     text-decoration: none;
 }
 
-.register-btn:hover {
+.login-links {
+    border-top: solid rgba(118, 193, 250, 0.514);
+}
+
+.login-link:hover {
     background-color: #2f95e4;
 }
