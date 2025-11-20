@@ -3,6 +3,15 @@
 {% block title %}Connexion à Stubborn{% endblock %}
 
 {% block body %}
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
 <section class="login-card">
     <h1>Se connecter</h1>
 
@@ -26,7 +35,7 @@
     </form>
     <p class="forgot-password"><a href="#" >Mot de passe oublié</a></p>
     <p>Pas encore inscrit ? <br> 
-        <a href="{{ path('app_register') }}" class="register-btn">Créer un compte</a>
+        <a href="{{ path('app_register') }}" class="register-link">Créer un compte</a>
     </p>
 </section>
 {% endblock %}

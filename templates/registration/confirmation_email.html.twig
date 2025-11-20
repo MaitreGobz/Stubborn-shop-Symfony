@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmation de votre adresse e-mail</title>
+</head>
+
+<body>
+    <h1>Bienvenue chez Stubborn !</h1>
+
+    <p>
+        Merci de vous être inscrit sur la boutique Stubborn.
+    </p>
+
+    <p>
+        Pour activer votre compte et finaliser votre inscription, veuillez confirmer votre adresse e-mail
+        en cliquant sur le lien suivant :<br><br>
+
+        <a href="{{ signedUrl|raw }}">Confirmer mon adresse e-mail</a>
+    </p>
+
+    <p>
+        Ce lien expirera {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+    </p>
+
+    <p>
+        Si vous n'êtes pas à l'origine de cette inscription, vous pouvez ignorer cet e-mail.
+    </p>
+
+    <p>
+        À très vite sur <strong>Stubborn</strong> !
+    </p>
+</body>
+
+</html>
