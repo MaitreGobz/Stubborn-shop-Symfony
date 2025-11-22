@@ -1,20 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil - Stubborn{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<section class="home-container">
+    <h1>Nos produits mis en avant</h1>
+    <div class="featured-products">
+        {% for product in featuredProducts %}
+            <div class="featured-product-card">
+                <img src="{{ asset('images/products/' ~ product.image) }}" alt="image du produit" role="img">
+                <p><strong>{{ product.name }}</strong></p>
+                <p>{{ product.price }} €</p>
 
-    This friendly message is coming from:
+                {# "Voir" button only if logged in#}
+                {% if app.user %}
+                    <a href="#{#{{ path('app_product_show', {id: product.id}) }}#}" class="product-btn">
+                        Voir
+                    </a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</section>
+<section class="about-container">
+    <h2>A propos de Stubborn</h2>
+    <p class="about">
+        Stubborn est une marque de sweat-shirts basée à Londres.
+        Notre mission : proposer des produits de qualités et confortables,
+        sans compromis sur votre look.
+    </p>
     <ul>
-        <li>Your controller at <code>D:/Dev/stubborn-shop-symfony/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>D:/Dev/stubborn-shop-symfony/templates/home/index.html.twig</code></li>
+        <li><strong>Adresse :</strong> Piccadilly Circus, London W1J 0DA, Royaume-Uni</li>
+        <li><strong>Contact :</strong><a href="mailto:stubborn@blabla.com" target="_blank">stubborn@blabla.com</a></li>
+        <li><strong>Slogan :</strong> Don't compromise on your look!</li>
     </ul>
-</div>
+</section>
 {% endblock %}
