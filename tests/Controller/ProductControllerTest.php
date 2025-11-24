@@ -2,6 +2,7 @@
 
 namespace App\Tests\Controller;
 
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
@@ -9,9 +10,22 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 class ProductControllerTest extends WebTestCase
 {
+    private function loginExistingUser($client): void
+    {
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        $user = $userRepository->findOneBy(['email' => 'login-test@example.com']);
+
+        $this->assertNotNull($user, "L'utilisateur login-test@example.com n'existe pas en base test.");
+
+        $client->loginUser($user, 'main');
+    }
+    
     public function testProductsPageLoads(): void
     {
         $client = static::createClient();
+        $this->loginExistingUser($client);
+
         $client->request('GET', '/products');
 
         $this->assertResponseIsSuccessful();
@@ -21,6 +35,8 @@ class ProductControllerTest extends WebTestCase
     public function testProductsFilterRange(): void
     {
         $client = static::createClient();
+        $this->loginExistingUser($client);
+
         $client->request('GET', '/products?range=29-35');
 
         $this->assertResponseIsSuccessful();
