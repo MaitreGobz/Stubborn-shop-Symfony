@@ -3,6 +3,7 @@
 @import url('login.css');
 @import url('register.css');
 @import url('home.css');
+@import url('products.css');
 
 body {
     background-color: white;
