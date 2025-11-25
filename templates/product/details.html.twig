@@ -5,13 +5,22 @@
 {% block body %}
     <section class="detail-container">
         <h1>Détails du sweat {{product.name}}</h1>
+
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endfor %}
+
         <div class="product-details">
             <div class="product-image">
                 <img src="{{ asset('images/products/' ~ product.image) }}" alt="Image du sweat {{ product.name}}" role="img">
             </div>
             <div class="product-infos">
                 <p><strong>Nom :</strong> {{ product.name }}</p>
-                <p><strong>Prix :</strong> {{ product.price }}</p>
+                <p><strong>Prix :</strong> {{ product.price }} €</p>
                 {{ form_start(addToCartForm, {
                     attr: { class: 'add-to-cart-form' }
                 }) }}

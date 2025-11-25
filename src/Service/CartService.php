@@ -29,7 +29,7 @@ class CartService
     /**
      * Repository des produits.
      * 
-     * @var ProductRepository $productRepository;
+     * @var ProductRepository $productRepository
      */
     private ProductRepository $productRepository;
 
@@ -37,7 +37,7 @@ class CartService
      * Constructeur du service panier.
      * 
      * @param RequestStack $requestStack Accès aà la session utilisateur.
-     * @param PorductRepository $productRepository Accès aux produits en base de donnée.
+     * @param ProductRepository $productRepository Accès aux produits en base de donnée.
      */
     public function __construct(RequestStack $requestStack, ProductRepository $productRepository)
     {
@@ -56,7 +56,7 @@ class CartService
     public function addToCart(Product $product, string $size): void
     {
         $cart = $this->getCart();
-        $key = $this->getId() . '_' . $size;
+        $key = $product->getId() . '_' . $size;
 
         if (!isset($cart[$key])) {
             $cart[$key] = [
@@ -116,7 +116,7 @@ class CartService
         $items = [];
         $cart = $this->getCart();
 
-        foreach ($cart as row) {
+        foreach ($cart as $row) {
             $product = $this->productRepository->find($row['productId']);
 
             // If the product is no longer available or no longer exists in the database
@@ -142,7 +142,7 @@ class CartService
      */
     public function getTotal(): float
     {
-        total = 0.0;
+        $total = 0.0;
 
         foreach ($this->getItems() as $item) {
             $total += $item['lineTotal'];
@@ -164,7 +164,7 @@ class CartService
     /**
      * Enregistre le panier en session.
      * 
-     * @param array{productId:int,size:string,quantity:int} $cart
+     * @param array<string, array{productId:int,size:string,quantity:int}> $cart
      * 
      * @return void
      */
