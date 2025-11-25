@@ -20,6 +20,7 @@ class ProductRepository extends ServiceEntityRepository
          * Retourne une liste de produits mis en avant pour la page d'accueil.
          *
          * @param int $limit Nombre maximum de produits à retourner.
+         * 
          * @return Product[] Liste de produits featured.
          */
        public function findFeatured(int $limit = 3): array
@@ -44,6 +45,9 @@ class ProductRepository extends ServiceEntityRepository
         * - null => aucun filtre (tous les produits)
         *
         * @param string|null $range Fourchette de prix.
+        * @param float $min Prix minimum inclus.
+        * @param float $max Prix maximum inclus.
+        *
         * @return Product[] Liste des produits filtrés.
         */
        public function findByPriceRange(?string $range): array

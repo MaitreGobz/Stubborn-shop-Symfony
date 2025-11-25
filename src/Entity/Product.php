@@ -6,6 +6,10 @@ use App\Repository\ProductRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+
+/**
+ * Représente un sweat de la marque Stubborn.
+ */
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
