@@ -1,0 +1,133 @@
+.cart-container {
+    max-width: 90vw;
+    margin: 2rem auto 2rem;
+    padding: 1.2rem;
+}
+
+.cart-container h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.cart-container p {
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+.flash {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.flash-success {
+    background-color: #d4edda;
+    color: #a8371a;
+    border: 1px solid #c3e6cb;
+}
+
+.flash-error,
+.flash-danger {
+    background-color: #d4edda;
+    color: #a8371a;
+    border: 1px solid #c3e6cb;
+}
+
+.cart-table {
+    text-align: left;
+    font-weight: 600;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+    width: 100%;
+}
+
+.cart-table tbody tr {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    border: 0.125rem solid #8b7d7d;
+}
+
+.cart-table td {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+}
+
+.cart-summary {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.8rem;
+}
+
+.cart-total {
+    border: 1px solid #000000;
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+}
+
+.cart-summary-top {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.cart-summary-bottom {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.remove-btn {
+    border: 0.125rem solid #8b7d7d;
+    padding: 0.5rem 0.6rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.remove-btn:hover {
+    background-color: #f3f3f3;
+}
+
+.checkout-btn {
+    background-color: #f8b6b6;
+    border-color: #f08a8a;
+    color: black;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.checkout-btn:hover {
+    background-color: #f59d9d;
+}
+
+.return-btn {
+    background-color: #bde9bd;
+    border-color: #9fd39f;
+    color: black;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.return-btn:hover {
+    background-color: #aee0ae;
+}
+
