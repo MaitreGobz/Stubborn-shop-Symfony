@@ -29,6 +29,7 @@ final class ProductController extends AbstractController
      *
      * @param Request $request Requête HTTP courante.
      * @param ProductRepository $productRepository Repo des produits.
+     * 
      * @return Response Page HTML rendue.
      */
     #[Route('/products', name: 'app_products', methods: ['GET'])]
