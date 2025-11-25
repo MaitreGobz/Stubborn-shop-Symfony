@@ -21,6 +21,8 @@ final class SecurityController extends AbstractController
      * - Si l'utilisateur est déjà connecté, renvoi vers l'accueil
      * - Affiche les erreurs de connexion
      * 
+     * Route : /login
+     * 
      * @param AuthencationUtils $authenticationUtils
      * 
      * @return Response Réponse HTTP contenant la page de connexion

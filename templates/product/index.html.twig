@@ -21,7 +21,7 @@
             <img src="{{ asset('images/products/' ~ product.image) }}" alt="image du produit" role="img">
             <p><strong>{{ product.name }}</strong></p>
             <p>{{ product.price }} €</p>
-            <a href="#{#{{ path('app_product_show', {id: product.id}) }}#}" class="product-btn">
+            <a href="{{ path('app_product_details', {id: product.id}) }}" class="product-btn">
                 Voir
             </a>
         </div>

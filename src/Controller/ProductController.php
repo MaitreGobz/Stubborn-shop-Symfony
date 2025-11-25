@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
+use App\Form\AddToCartFormType;
+use App\Service\CartService;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,6 +44,37 @@ final class ProductController extends AbstractController
         return $this->render('product/index.html.twig', [
             'products' => $products,
             'currentRange' => $range,
+        ]);
+    }
+
+    /**
+     * Affiche le détail d'un produit et permet de l'ajouter au panier.
+     * 
+     * Route : /product{id}
+     * 
+     * @param Product $product Produit récupéré via ParamConverter sur {id}
+     * @param Request $request Requête HTTP
+     * @param CartService $cartService Service de gestion du panier
+     * 
+     * @return Response Page du détail d'un produit
+     */
+    #[Route('/product/{id}', name: 'app_product_details', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    public function details(Product $product, Request $request, CartService $cartService): Response
+    {
+        $form = $this->createForm(AddToCartFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $size = $form->get('size')->getData();
+            $cartService->add($product, $size);
+
+            $this->addFlash('success', 'Produit ajouté à votre panier');
+
+            return $this->redirectToRoute('app_cart');
+        }
+        return $this->render('product/details.html.twig', [
+            'product' => $product,
+            'addToCartForm' => $form->createView(),
         ]);
     }
 }

@@ -32,6 +32,8 @@ class RegistrationController extends AbstractController
      * - Crée un nouvel utilisateur avec le rôle ROLE_USER
      * - Hash le mot de passe saisi
      * - Envoie un e-mail de confirmation d'adresse
+     * 
+     * Route : /register
      *
      * @param Request                     $request          Requête HTTP contenant les données du formulaire.
      * @param UserPasswordHasherInterface $userPasswordHasher Service de hashage des mots de passe.
@@ -72,7 +74,7 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form ->createView(),
+            'registrationForm' => $form->createView(),
         ]);
     }
 
