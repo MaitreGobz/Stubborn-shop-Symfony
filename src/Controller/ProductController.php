@@ -51,7 +51,7 @@ final class ProductController extends AbstractController
     /**
      * Affiche le détail d'un produit et permet de l'ajouter au panier.
      * 
-     * Route : /product{id}
+     * Route : /product/{id}
      * 
      * @param Product $product Produit récupéré via ParamConverter sur {id}
      * @param Request $request Requête HTTP
@@ -67,7 +67,7 @@ final class ProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $size = $form->get('size')->getData();
-            $cartService->add($product, $size);
+            $cartService->addToCart($product, $size);
 
             $this->addFlash('success', 'Produit ajouté à votre panier');
 
