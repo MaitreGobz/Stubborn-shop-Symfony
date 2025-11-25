@@ -15,6 +15,8 @@ final class HomeController extends AbstractController
      * - Affiche la liste des produits en avant
      * - Adaptation des liens du menu et des boutons "Voir" si l'utilisateur est connecté
      * 
+     * Route : /
+     * 
      * @param ProductRepository $productRepository Accès aux produits en base de donnée.
      * 
      * @return Response Page HTML de la home.

@@ -1,0 +1,51 @@
+.detail-container h1 {
+    margin-top: 2rem;
+}
+
+.product-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1.875rem;
+    min-height: 20rem;
+    padding: 1.25rem 1.5rem 1.5rem;
+    border: 0.125rem solid #8b7d7d;
+}
+
+.product-image {
+    flex: 1.2;
+    height: 16rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-image img {
+    max-width: 100%;
+    max-height: 100%;
+
+}
+
+.product-infos {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.product-infos p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.add-to-cart-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.add-to-cart-btn {
+    font-size: 1.5rem;
+    padding: 0.8rem;
+    border-radius: 1rem;
+}

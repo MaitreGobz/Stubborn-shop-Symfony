@@ -15,7 +15,7 @@
 
                 {# "Voir" button only if logged in#}
                 {% if app.user %}
-                    <a href="#{#{{ path('app_product_show', {id: product.id}) }}#}" class="product-btn">
+                    <a href="{{ path('app_product_details', {id: product.id}) }}" class="product-btn">
                         Voir
                     </a>
                 {% endif %}
