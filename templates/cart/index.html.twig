@@ -1,20 +1,66 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CartController!{% endblock %}
+{% block title %}Mon panier - Stubborn{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<section class="cart-container">
+    <h1>Mon Panier</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}      
+    {% endfor %}
+    
+    {# If the cart is empty #}
+    {% if items is empty %}
+        <p>Votre panier est vide</p>
+        <a href="{{ path('app_products') }}" class="return-btn">
+            Continuer mes achats
+        </a>
+    {% else %}
+        <table class="cart-table">
+            
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td class="cart-product">
+                            <img src="{{ asset('images/products/' ~ item.product.image) }}" alt="Image du sweat {{ item.product.name}}" role="img" class="cart-product-image">
+                        </td>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.product.price }} €</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.size }}</td>
+                        <td>
+                            <form method="post" action="{{ path('app_cart_remove', {'id': item.product.id, 'size': item.size}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet article du panier ?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('remove' ~ item.product.id ~ item.size) }}">
+                                <button class="remove-btn">Retirer du panier</button>
+                            </form>
+                        </td>
+                    </tr>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>D:/Dev/stubborn-shop-symfony/src/Controller/CartController.php</code></li>
-        <li>Your template at <code>D:/Dev/stubborn-shop-symfony/templates/cart/index.html.twig</code></li>
-    </ul>
-</div>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="cart-summary">
+            <div class="cart-summary-top">
+                <div class="cart-total">
+                    <strong>TOTAL :</strong> {{ total }} €
+                </div>
+                <a href="#{#{{ path('app_cart_checkout') }}#}" class="checkout-btn">
+                    FINALISER MA COMMANDE
+                </a>
+            </div>
+        
+            <div class="cart-summary-bottom">
+                <a href="{{ path('app_products') }}" class="return-btn">
+                    CONTINUER MES ACHATS
+                </a>
+            </div>
+        </div>
+    {% endif %}
+
+</section>
 {% endblock %}

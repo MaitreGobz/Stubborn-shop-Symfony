@@ -5,6 +5,7 @@
 @import url('home.css');
 @import url('products.css');
 @import url('details.css');
+@import url('cart.css');
 
 body {
     background-color: white;
