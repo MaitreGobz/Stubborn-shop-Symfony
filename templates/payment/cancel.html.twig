@@ -1,10 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Paiement annulé{% endblock %}
+{% block title %}Paiement annulé - Stubborn{% endblock %}
 
 {% block body %}
-    <h1>Paiement annulé ❌</h1>
-    <p>Votre paiement a été annulé. Vous pouvez modifier votre panier ou réessayer.</p>
+<section class="checkout-cancel">
+    <h1>Paiement annulé</h1>
+    <p>Votre paiement a été annulé. Votre panier est toujours disponible si vous souhaitez réessayer.</p>
 
-    <a href="{{ path('app_cart') }}">Retour au panier</a>
+    <p>
+        <a href="{{ path('app_cart') }}">Retourner au panier</a>
+    </p>
+</section>
 {% endblock %}
