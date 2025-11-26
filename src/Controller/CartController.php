@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Service\CartService;
+use App\Service\StripeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Contrôleur du panier d'achat (front-office).
@@ -13,14 +16,30 @@ use Symfony\Component\Routing\Attribute\Route;
  */
 final class CartController extends AbstractController
 {
+    /**
+     * Service de gestion du panier.
+     *
+     * @var CartService
+     */
     private CartService $cartService;
 
     /**
-     * Constructeur du contrôleur panier.
+     * Service de paiement Stripe.
+     *
+     * @var StripeService
      */
-    public function __construct(CartService $cartService)
+    private StripeService $stripeService;
+
+    /**
+     * Constructeur du contrôleur panier.
+     * 
+     * @param CartService $cartService Service de gestion du panier.
+     * @param StripeService $stripeService Service de paiement Stripe.
+     */
+    public function __construct(CartService $cartService, StripeService $stripeService)
     {
         $this->cartService = $cartService;
+        $this->stripeService = $stripeService;
     }
 
     /**
@@ -31,6 +50,8 @@ final class CartController extends AbstractController
      * - Validation de la commande
      * 
      * Route : /cart
+     * 
+     * @return Response La réponse HTTP contenant la vue du panier.
      */
     #[Route('/cart', name: 'app_cart', methods: ['GET'])]
     public function index(): Response
@@ -54,7 +75,7 @@ final class CartController extends AbstractController
      * 
      * @return Response Redirection vers la page du panier.
      */
-    #[Route('cart/remove/{id}/{size}', name: 'app_cart_remove', methods: ['POST'])]
+    #[Route('/cart/remove/{id}/{size}', name: 'app_cart_remove', methods: ['POST'])]
     public function removeItem(int $id, string $size): Response
     {
         $this->cartService->removeItem($id, $size);
@@ -62,5 +83,45 @@ final class CartController extends AbstractController
         $this->addFlash('success', 'Produit retiré du panier');
 
         return $this->redirectToRoute('app_cart');
+    }
+
+    /**
+     * Valide le panier et crée une session de paiement Stripe.
+     * 
+     * Route : /cart/checkout
+     * 
+     * @return RedirectResponse Redirection vers la page de paiement Stripe.
+     */
+    #[Route('/cart/checkout', name: 'app_cart_checkout', methods: ['POST'])]
+    public function checkout(): RedirectResponse
+    {
+        $cartItems = $this->cartService->getItems();
+
+        // Preparing articles for Stripe
+        $stripeItems = [];
+        foreach ($cartItems as $item) {
+            $product = $item['product'];
+            $quantity = $item['quantity'];
+
+            $stripeItems[] = [
+                'name' => $product->getName(),
+                'amount' => (int) round($product->getPrice() * 100),
+                'quantity' => $quantity,
+            ];
+        }
+
+        // Creating success and cancellation URLs
+        $successUrl = $this->generateUrl('payment_success', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $cancelUrl = $this->generateUrl('payment_cancel', [], UrlGeneratorInterface::ABSOLUTE_URL);
+
+        // Creating the Stripe payment session
+        $session = $this->stripeService->createCheckoutSession(
+            $stripeItems,
+            $successUrl,
+            $cancelUrl
+        );
+
+        // Redirecting to the Stripe payment page
+        return new RedirectResponse($session->url);
     }
 }
