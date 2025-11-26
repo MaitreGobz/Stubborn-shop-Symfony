@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement réussi{% endblock %}
+
+{% block body %}
+    <h1>Paiement réussi ✅</h1>
+    <p>Merci pour votre commande Stubborn !</p>
+
+    <a href="{{ path('app_cart') }}">Retour au panier</a>
+{% endblock %}

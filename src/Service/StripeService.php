@@ -3,7 +3,8 @@
 namespace App\Service;
 
 use Stripe\StripeClient;
-use Stipe\Checkout\Session;
+use Stripe\Checkout\Session;
+use Stripe\Stripe;
 
 /**
  * Class StripeService
@@ -23,11 +24,11 @@ class StripeService
     /**
      * Constructeur de la classe StripeService.
      * 
-     * @param string $apiKey Clé API Stripe.
+     * @param string $stripeSecretKey Clé API Stripe.
      */
-    public function __construct(string $apiKey)
+    public function __construct(string $stripeSecretKey)
     {
-        $this->client = new StripeClient($apiKey);
+        $this->client = new StripeClient($stripeSecretKey);
     }
 
     /**
@@ -91,5 +92,3 @@ class StripeService
         return $lineItems;
     }
 }
-
-

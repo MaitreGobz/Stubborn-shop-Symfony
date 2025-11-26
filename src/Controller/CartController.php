@@ -95,7 +95,13 @@ final class CartController extends AbstractController
     #[Route('/cart/checkout', name: 'app_cart_checkout', methods: ['POST'])]
     public function checkout(): RedirectResponse
     {
+        // Retrieving items from the cart
         $cartItems = $this->cartService->getItems();
+
+        if (empty($cartItems)) {
+            $this->addFlash('error', 'Votre panier est vide.');
+            return $this->redirectToRoute('app_cart');
+        }
 
         // Preparing articles for Stripe
         $stripeItems = [];
@@ -115,11 +121,16 @@ final class CartController extends AbstractController
         $cancelUrl = $this->generateUrl('payment_cancel', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
         // Creating the Stripe payment session
-        $session = $this->stripeService->createCheckoutSession(
+        try {
+            $session = $this->stripeService->createCheckoutSession(
             $stripeItems,
             $successUrl,
             $cancelUrl
         );
+        } catch (\Throwable $e) {
+            $this->addFlash('error', 'Une erreur est survenue lors de la création du paiement. Veuillez réessayer.');
+            return $this->redirectToRoute('app_cart');
+        }
 
         // Redirecting to the Stripe payment page
         return new RedirectResponse($session->url);
