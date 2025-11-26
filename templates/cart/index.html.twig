@@ -49,9 +49,11 @@
                 <div class="cart-total">
                     <strong>TOTAL :</strong> {{ total }} €
                 </div>
-                <a href="#{#{{ path('app_cart_checkout') }}#}" class="checkout-btn">
-                    FINALISER MA COMMANDE
-                </a>
+                <form action="{{ path('app_cart_checkout') }}" method="post" class="checkout-form" data-turbo="false">
+                    <button type="submit" class="checkout-btn">
+                        FINALISER MA COMMANDE
+                    </button>
+                </form>
             </div>
         
             <div class="cart-summary-bottom">
