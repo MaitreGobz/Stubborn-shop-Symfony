@@ -1,10 +1,10 @@
 security:
-    # Hashage des mots de passe
+    # Password hashing
     password_hashers:
         App\Entity\User:
             algorithm: auto
 
-    # Chargement des utilisateurs
+    # Loading users
     providers:
         app_user_provider:
             entity:
@@ -20,32 +20,32 @@ security:
             lazy: true
             provider: app_user_provider
 
-            # Authentification via formulaire
+            # Authentication via form
             form_login:
                 login_path: app_login
                 check_path: app_login
                 enable_csrf: true
                 default_target_path: app_home
 
-            # Déconnexion
+            # Logout
             logout:
                 path: app_logout
                 target: app_home
 
-    # Règles de sécurité selon les routes
+    # Safety rules according to the roads
     access_control:
-        # Back-office réservé à admin
+        # Back office reserved for admin
         - { path: ^/admin, roles: ROLE_ADMIN }
 
-        # Panier et boutique accessibles uniquement aux utilisateurs connectés
+        # Shopping cart and store accessible only to logged-in users
         - { path: ^/cart, roles: ROLE_USER }
         - { path: ^/products, roles: ROLE_USER }
 
-        # Inscription et login accessibles sans être connecté
+        # Registration and login are accessible without being logged in.
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/register, roles: PUBLIC_ACCESS }
 
-        # Page d'accueil accessible à tout le monde
+        # Homepage accessible to everyone
         - { path: ^/, roles: PUBLIC_ACCESS }
 
 when@test:
