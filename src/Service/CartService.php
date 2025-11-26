@@ -172,4 +172,14 @@ class CartService
     {
         $this->session->set(self::CART_KEY, $cart);
     }
+
+    /**
+     * Efface le panier actuel de la session utilisateur.
+     * 
+     * @return void
+     */
+    public function clear(): void
+    {
+        $this->session->remove(self::CART_KEY);
+    }
 }

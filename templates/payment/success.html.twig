@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande validée - Stubborn{% endblock %}
+
+{% block body %}
+<section class="checkout-success">
+    <h1>Merci pour votre commande !</h1>
+    <p>Votre paiement a bien été pris en compte. Vous recevrez prochainement un e-mail de confirmation.</p>
+
+    <p>
+        <a href="{{ path('app_home') }}">Retour à l'accueil</a>
+        |
+        <a href="{{ path('app_products') }}">Voir d'autres sweats</a>
+    </p>
+</section>
+{% endblock %}
