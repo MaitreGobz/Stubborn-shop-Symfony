@@ -136,6 +136,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+     * Indique si l'utilisateur possède le rôle administrateur.
+     * 
+     * @return bool True si l'utilisateur est admin, false sinon.
+     */
+    public function isAdmin(): bool
+    {
+        return in_array('ROLE_ADMIN', $this->roles, true);
+    }
+
+    /**
      * @see PasswordAuthenticatedUserInterface
      */
     public function getPassword(): ?string
