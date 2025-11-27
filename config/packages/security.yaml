@@ -11,6 +11,10 @@ security:
                 class: App\Entity\User
                 property: email
 
+    # Roles hierarchy
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_USER]
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -26,6 +30,7 @@ security:
                 check_path: app_login
                 enable_csrf: true
                 default_target_path: app_home
+                success_handler: App\Security\LoginSuccessHandler
 
             # Logout
             logout:
