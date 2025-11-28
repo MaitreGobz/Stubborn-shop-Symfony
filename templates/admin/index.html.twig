@@ -57,7 +57,7 @@
             {{ form_rest(creationForm) }}
             
             <div class="admin-product-actions">
-                <button type="submit" class="btn btn-add admin-btn-wide">
+                <button type="submit" class="btn btn-add">
                     AJOUTER
                 </button>
             </div>
@@ -72,13 +72,18 @@
         <section class="admin-product-row">
             <div class="admin-product-image-placeholder">
                 {% if product.image %}
-                <img src="{{ asset('images/products/' ~ product.image) }}" alt="Image du sweat {{ product.name }}"
-                    class="admin-product-image">
+                    <img src="{{ asset('images/products/' ~ product.image) }}" alt="Image du sweat {{ product.name }}"
+                        class="admin-product-image">
                 {% endif %}
             </div>
         
             <div class="admin-product-form">
-                {{ form_start(form) }}
+                {{ form_start(form, {
+                    attr: {
+                    id: 'edit-form-' ~ product.id,
+                    class: 'admin-edit-form'
+                    }
+                }) }}
                 <div class="admin-product-fields">
                     <div class="admin-field-group">
                         {{ form_label(form.name, 'Nom') }}
@@ -109,23 +114,22 @@
                         {{ form_widget(form.stockXl) }}
                     </div>
                 </div>
+                {{ form_end(form) }}
         
                 <div class="admin-actions-wrapper">
                     <form method="post" action="{{ path('app_admin_product_delete', { id: product.id }) }}"
                         onsubmit="return confirm('Supprimer ce produit ?');" class="admin-delete-form">
                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id) }}">
-                        <button class="delete-btn admin-btn-wide" type="submit">
+                        <button class="btn delete-btn" type="submit">
                             SUPPRIMER
                         </button>
                     </form>
                     
                     <div class="admin-product-actions">
-                        <button type="submit" class="edit-btn admin-btn-wide">
+                        <button type="submit" class="btn edit-btn" form="edit-form-{{ product.id }}">
                             MODIFIER
                         </button>
-                    </div>
-                    {{ form_end(form) }}
-        
+                    </div>        
                 </div>
             </div>
         </section>
