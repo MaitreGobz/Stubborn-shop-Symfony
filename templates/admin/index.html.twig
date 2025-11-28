@@ -1,5 +1,138 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
+
+{% block title %}Back-office - Produits{% endblock %}
 
 {% block body %}
-    <h1>Hello World!</h1>
+<div class="admin-page">
+
+    <h1>Back-Office</h1>
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    {# Ajoutd'un produit #}
+    <section class="admin-product-row admin-product-row-create">
+        <div class="admin-product-image-placeholder"></div>
+
+        {{ form_start(creationForm, {
+            attr: { class: 'admin-product-form' }
+        }) }}
+        
+            <div class="admin-product-fields">
+                <div class="admin-field-group">
+                    {{ form_label(creationForm.name, 'Nom') }}
+                    {{ form_widget(creationForm.name) }}
+                </div>
+                <div class="admin-field-group">
+                    {{ form_label(creationForm.price, 'Prix') }}
+                    {{ form_widget(creationForm.price) }}
+                </div>
+                <div class="admin-field-group">
+                    {{ form_label(creationForm.stockXs, 'Stock XS') }}
+                    {{ form_widget(creationForm.stockXs) }}
+                </div>
+                <div class="admin-field-group">
+                    {{ form_label(creationForm.stockS, 'Stock S') }}
+                    {{ form_widget(creationForm.stockS) }}
+                </div>
+                <div class="admin-field-group">
+                    {{ form_label(creationForm.stockM, 'Stock M') }}
+                    {{ form_widget(creationForm.stockM) }}
+                </div>
+                <div class="admin-field-group">
+                    {{ form_label(creationForm.stockL, 'Stock L') }}
+                    {{ form_widget(creationForm.stockL) }}
+                </div>
+                <div class="admin-field-group">
+                    {{ form_label(creationForm.stockXl, 'Stock XL') }}
+                    {{ form_widget(creationForm.stockXl) }}
+                </div>
+            </div>
+            
+            {{ form_rest(creationForm) }}
+            
+            <div class="admin-product-actions">
+                <button type="submit" class="btn btn-add admin-btn-wide">
+                    AJOUTER
+                </button>
+            </div>
+
+            {{ form_end(creationForm) }}
+
+    </section>
+
+    {# Ligne de produit #}
+    {% for product in products %}
+        {% set form = editForms[product.id] %}
+        <section class="admin-product-row">
+            <div class="admin-product-image-placeholder">
+                {% if product.image %}
+                <img src="{{ asset('images/products/' ~ product.image) }}" alt="Image du sweat {{ product.name }}"
+                    class="admin-product-image">
+                {% endif %}
+            </div>
+        
+            <div class="admin-product-form">
+                {{ form_start(form) }}
+                <div class="admin-product-fields">
+                    <div class="admin-field-group">
+                        {{ form_label(form.name, 'Nom') }}
+                        {{ form_widget(form.name) }}
+                    </div>
+                    <div class="admin-field-group">
+                        {{ form_label(form.price, 'Prix') }}
+                        {{ form_widget(form.price) }}
+                    </div>
+                    <div class="admin-field-group">
+                        {{ form_label(form.stockXs, 'Stock XS') }}
+                        {{ form_widget(form.stockXs) }}
+                    </div>
+                    <div class="admin-field-group">
+                        {{ form_label(form.stockS, 'Stock S') }}
+                        {{ form_widget(form.stockS) }}
+                    </div>
+                    <div class="admin-field-group">
+                        {{ form_label(form.stockM, 'Stock M') }}
+                        {{ form_widget(form.stockM) }}
+                    </div>
+                    <div class="admin-field-group">
+                        {{ form_label(form.stockL, 'Stock L') }}
+                        {{ form_widget(form.stockL) }}
+                    </div>
+                    <div class="admin-field-group">
+                        {{ form_label(form.stockXl, 'Stock XL') }}
+                        {{ form_widget(form.stockXl) }}
+                    </div>
+                </div>
+        
+                <div class="admin-actions-wrapper">
+                    <form method="post" action="{{ path('app_admin_product_delete', { id: product.id }) }}"
+                        onsubmit="return confirm('Supprimer ce produit ?');" class="admin-delete-form">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id) }}">
+                        <button class="delete-btn admin-btn-wide" type="submit">
+                            SUPPRIMER
+                        </button>
+                    </form>
+                    
+                    <div class="admin-product-actions">
+                        <button type="submit" class="edit-btn admin-btn-wide">
+                            MODIFIER
+                        </button>
+                    </div>
+                    {{ form_end(form) }}
+        
+                </div>
+            </div>
+        </section>
+    
+    {% else %}
+    <p>Aucun produit pour le moment.</p>
+    {% endfor %}
+
+</div>
 {% endblock %}
