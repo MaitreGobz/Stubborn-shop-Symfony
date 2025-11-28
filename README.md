@@ -20,6 +20,27 @@ Ce projet respecte l’intégralité des exigences du sujet du devoir, notamment
 
 ---
 
+## 🧰 Pré-requis
+
+Pour installer et exécuter le projet Stubborn en local, vous devez disposer des éléments suivants :
+
+### 🔧 Outils & environnements
+
+-   **PHP 8.2+**
+-   **Composer** (gestionnaire de dépendances PHP)
+-   **Symfony CLI** (indispensable pour le serveur local)
+-   **MySQL 8+** (ou MariaDB compatible)
+-   **Git** (pour cloner le dépôt)
+-   **Node.js 18+** et **npm** (si Webpack Encore est utilisé)
+
+### 💳 Comptes & services externes
+
+-   **Compte Stripe** (mode test)
+    -   Clé publique (`STRIPE_PUBLIC_KEY`)
+    -   Clé secrète (`STRIPE_SECRET_KEY`)
+-   **Compte Mailtrap**
+    -   Serveur SMTP (`MAILER_DSN`)
+
 ## 🚀 Fonctionnalités
 
 ### 👤 Authentification & gestion utilisateurs
