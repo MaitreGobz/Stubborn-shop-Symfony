@@ -154,4 +154,6 @@ Back-office :
 
 ## 📚 Documentation
 
-Une documentation complète est fournie au format PDF dans le dépôt.
+Une documentation complète est fournie au format PDF dans le dépôt:
+
+`docs\Stubborn site eCommerce - Documentation technique.pdf`
